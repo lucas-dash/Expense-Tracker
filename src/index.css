@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply dark:bg-gray-800 bg-white;
+}
+
+.action-button {
+  @apply border-2 border-darkBG dark:border-light rounded-md px-1 py-0.5 flex items-center font-semibold hover:scale-x-105 transition-all duration-300;
+}
