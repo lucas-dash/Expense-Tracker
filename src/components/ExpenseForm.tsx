@@ -3,31 +3,19 @@ import { HiPlusSmall } from 'react-icons/hi2';
 import { v4 as uuidv4 } from 'uuid';
 // hooks
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router';
+import useTransaction from '../Context/TransactionContex';
 import useLocalStorage from '../useLocalStorage';
+// types
+import { ExpenseType, CategoryType } from '../Types';
 
-interface FormProps {
-  hideForm: (value: (prev: boolean) => boolean) => void;
-}
-
-interface CategoryType {
-  id: number;
-  icon: string;
-  name: string;
-}
-
-type ExpenseType = {
-  id: string;
-  type: string;
-  category: string;
-  amount: string;
-  date: string;
-  note?: string;
-};
 const expenseOption: [string, string] = ['Outcome', 'Income'];
 
-const ExpenseForm = ({ hideForm }: FormProps) => {
-  const [outcome, setOutcome] = useLocalStorage<ExpenseType[]>('outome', []);
-  const [income, setIncome] = useLocalStorage<ExpenseType[]>('income', []);
+const ExpenseForm = () => {
+  const { addTransaction } = useTransaction();
+
+  const navigate = useNavigate();
+
   const [category, setCategory] = useLocalStorage<CategoryType[]>('category', [
     { id: 1, icon: '🍔', name: 'Food & Drinks' },
     { id: 2, icon: '☕️', name: 'Coffee' },
@@ -63,19 +51,12 @@ const ExpenseForm = ({ hideForm }: FormProps) => {
         id: uuidv4(),
         type: optionExpense,
         category: categoryRef.current?.value,
-        amount: amountRef.current?.value,
+        amount: Number(amountRef.current?.value),
         date: dateRef.current?.value,
         note: noteRef.current?.value,
       };
 
-      // income or outcome
-      if (optionExpense === 'Outcome') {
-        setOutcome((prevOutcome): ExpenseType[] => {
-          return [...prevOutcome, newExpense];
-        });
-      } else if (optionExpense === 'Income') {
-        setIncome((prevIncome): ExpenseType[] => [...prevIncome, newExpense]);
-      }
+      addTransaction(newExpense);
 
       categoryRef.current.value = '';
       amountRef.current.value = '';
@@ -87,7 +68,7 @@ const ExpenseForm = ({ hideForm }: FormProps) => {
   }
 
   return (
-    <article className="fixed inset-0 bottom-56 bg-transparent flex items-center justify-center">
+    <article className="bg-transparent flex items-center justify-center">
       <form
         className="bg-gradient-to-br from-accent-200 to-accent-100 w-72 gap-5 p-5 
       rounded-xl"
@@ -96,7 +77,7 @@ const ExpenseForm = ({ hideForm }: FormProps) => {
         <label className="flex items-end justify-end h-3">
           <div
             className="transform rotate-45 translate-x-3 inline-block cursor-pointer hover:scale-125 transition-all duration-300"
-            onClick={() => hideForm((prev) => !prev)}
+            onClick={() => navigate(-1)}
           >
             <HiPlusSmall size={27} />
           </div>
@@ -108,10 +89,8 @@ const ExpenseForm = ({ hideForm }: FormProps) => {
               <label
                 key={i}
                 htmlFor={option}
-                className={`cursor-pointer rounded-xl px-3 text-light font-medium border-2 border-light transition-all duration-200 ease-out ${
-                  optionExpense === option
-                    ? 'bg-light text-dark dark:text-dark'
-                    : ''
+                className={`cursor-pointer rounded-xl px-3 font-medium border-2 border-light transition-all duration-200 ease-out ${
+                  optionExpense === option ? 'bg-light text-dark' : 'text-light'
                 }`}
               >
                 <input
@@ -142,7 +121,6 @@ const ExpenseForm = ({ hideForm }: FormProps) => {
               min={0}
               ref={amountRef}
               placeholder="0$"
-              // onChange={handleInputChange}
               required
               className="rounded-lg focus:outline-dark p-0.5 placeholder:text-dark"
             />
@@ -157,15 +135,15 @@ const ExpenseForm = ({ hideForm }: FormProps) => {
               name="category"
               id="category"
               ref={categoryRef}
-              // onChange={handleSelectChange}
               required
+              className="rounded-lg focus:outline-dark p-0.5 placeholder:text-dark"
             >
               <option value=""></option>
-              {category.map((cat) => {
+              {category.map((cate) => {
                 return (
-                  <option key={cat.id} value={cat.name}>
-                    {cat.icon}
-                    {cat.name}
+                  <option key={cate.id} value={cate.name}>
+                    {cate.icon}
+                    {cate.name}
                   </option>
                 );
               })}
@@ -180,8 +158,6 @@ const ExpenseForm = ({ hideForm }: FormProps) => {
               type="date"
               name="date"
               ref={dateRef}
-              // onChange={handleInputChange}
-              // defaultValue={}
               required
               className="p-0.5 rounded-lg focus:outline-dark"
             />
@@ -195,7 +171,6 @@ const ExpenseForm = ({ hideForm }: FormProps) => {
               type="text"
               name="note"
               ref={noteRef}
-              // onChange={handleInputChange}
               placeholder="Add notes..."
               className="focus:outline-dark p-0.5 rounded-lg"
             />
