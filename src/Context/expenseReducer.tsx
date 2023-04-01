@@ -1,4 +1,4 @@
-import { ExpenseType } from './Types';
+import { ExpenseType } from '../Types';
 
 type initStateType = {
   transactions: ExpenseType[];

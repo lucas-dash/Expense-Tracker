@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import expenseReducer from '../expenseReducer';
+import expenseReducer from './expenseReducer';
 import { ExpenseType } from '../Types';
 
 type initStateType = {
