@@ -12,17 +12,9 @@ import { ExpenseType, CategoryType } from '../Types';
 const expenseOption: [string, string] = ['Outcome', 'Income'];
 
 const ExpenseForm = () => {
-  const { addTransaction } = useTransaction();
+  const { state, addTransaction } = useTransaction();
 
   const navigate = useNavigate();
-
-  const [category, setCategory] = useLocalStorage<CategoryType[]>('category', [
-    { id: 1, icon: '🍔', name: 'Food & Drinks' },
-    { id: 2, icon: '☕️', name: 'Coffee' },
-    { id: 3, icon: '⛽️', name: 'Gas' },
-    { id: 4, icon: '🎮', name: 'Game' },
-    { id: 5, icon: '🖥️', name: 'Tech' },
-  ]);
 
   //! outcome or income
   const [optionExpense, setOptionExpense] = useState<string>('Outcome');
@@ -139,7 +131,7 @@ const ExpenseForm = () => {
               className="rounded-lg focus:outline-dark p-0.5 placeholder:text-dark"
             >
               <option value=""></option>
-              {category.map((cate) => {
+              {state.category.map((cate) => {
                 return (
                   <option key={cate.id} value={cate.name}>
                     {cate.icon}

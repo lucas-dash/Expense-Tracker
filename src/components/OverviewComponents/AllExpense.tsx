@@ -2,7 +2,6 @@ import { HiPlusSmall } from 'react-icons/hi2';
 import Transaction from '../Transaction';
 import useTransaction from '../../Context/TransactionContex';
 import { Link } from 'react-router-dom';
-import { useMemo } from 'react';
 
 const AllExpense = () => {
   const { state, removeTransaction } = useTransaction();
@@ -18,10 +17,7 @@ const AllExpense = () => {
           aria-label="add expense"
         >
           add
-          <HiPlusSmall
-            size={20}
-            style={{ display: 'inline-block', fontWeight: 'bold' }}
-          />
+          <HiPlusSmall size={20} className="inline-block font-bold" />
         </Link>
       </div>
 

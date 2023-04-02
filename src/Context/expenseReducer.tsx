@@ -1,13 +1,16 @@
-import { ExpenseType } from '../Types';
+import { CategoryType, ExpenseType } from '../Types';
 
 type initStateType = {
   transactions: ExpenseType[];
+  category: CategoryType[];
 };
 
 const ACTION = {
   ADD_TRANSACTION: 'ADD_TRANSACTION',
   REMOVE_TRANSACTION: 'REMOVE_TRANSACTION',
   EDIT_TRANSACTION: 'EDIT_TRANSACTION',
+  ADD_CATEGORY: 'ADD_CATEGORY',
+  REMOVE_CATEGORY: 'REMOVE_CATEGORY',
 };
 
 export type ReducerAction = {

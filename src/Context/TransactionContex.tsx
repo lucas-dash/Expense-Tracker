@@ -1,26 +1,30 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import expenseReducer from './expenseReducer';
-import { ExpenseType } from '../Types';
+import { CategoryType, ExpenseType } from '../Types';
+import useLocalStorage from '../useLocalStorage';
 
 type initStateType = {
   transactions: ExpenseType[];
+  category: CategoryType[];
 };
 
-export const initialState: initStateType = {
-  transactions: [
-    {
-      id: '72a881ef-99ad-4df6-b2a2-7e9600f28397',
-      type: 'OutcomEE',
-      category: 'Food & Drinks',
-      amount: 200,
-      date: '2024-02-01',
-      note: '',
-    },
-  ],
-};
+const useTransactionContext = (): UseTransactionContextType => {
+  const [transactions, setTransactions] = useLocalStorage<ExpenseType[]>(
+    'transactions',
+    []
+  );
+  const [category, setCategory] = useLocalStorage<CategoryType[]>('category', [
+    { id: 1, icon: '🍔', name: 'Food & Drinks' },
+    { id: 2, icon: '☕️', name: 'Coffee' },
+    { id: 3, icon: '⛽️', name: 'Gas' },
+    { id: 4, icon: '🎮', name: 'Game' },
+    { id: 5, icon: '🖥️', name: 'Tech' },
+  ]);
 
-const useTransactionContext = (initState: initStateType) => {
-  const [state, dispatch] = useReducer(expenseReducer, initState);
+  const [state, dispatch] = useReducer(expenseReducer, {
+    transactions,
+    category,
+  });
 
   //? actions
   const addTransaction = (expense: ExpenseType) => {
@@ -31,27 +35,31 @@ const useTransactionContext = (initState: initStateType) => {
     dispatch({ type: 'REMOVE_TRANSACTION', payload: expense });
   };
 
+  useEffect(() => {
+    setTransactions(state.transactions);
+    setCategory(state.category);
+  }, [state.transactions, state.category]);
+
   return { state, addTransaction, removeTransaction };
 };
 
-type UseTransactionContextType = ReturnType<typeof useTransactionContext>;
-
-const initContextState: UseTransactionContextType = {
-  state: initialState,
-  addTransaction: () => {},
-  removeTransaction: () => {},
+type UseTransactionContextType = {
+  state: initStateType;
+  addTransaction: (expense: ExpenseType) => void;
+  removeTransaction: (expense: ExpenseType) => void;
 };
 
 type ProviderType = {
   children: React.ReactNode;
 };
 
-export const TransactionContext =
-  createContext<UseTransactionContextType>(initContextState);
+const TransactionContext = createContext<UseTransactionContextType | undefined>(
+  undefined
+);
 
 export const TransactionProvider = ({ children }: ProviderType) => {
   return (
-    <TransactionContext.Provider value={useTransactionContext(initialState)}>
+    <TransactionContext.Provider value={useTransactionContext()}>
       {children}
     </TransactionContext.Provider>
   );
@@ -65,7 +73,7 @@ type UseTransactionHook = {
 
 const useTransaction = (): UseTransactionHook => {
   const context = useContext(TransactionContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useTransaction must be used within transaction context');
   }
 
