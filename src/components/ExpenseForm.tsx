@@ -5,9 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import useTransaction from '../Context/TransactionContex';
-import useLocalStorage from '../useLocalStorage';
 // types
-import { ExpenseType, CategoryType } from '../Types';
+import { ExpenseType } from '../Types';
 
 const expenseOption: [string, string] = ['Outcome', 'Income'];
 
@@ -131,13 +130,15 @@ const ExpenseForm = () => {
               className="rounded-lg focus:outline-dark p-0.5 placeholder:text-dark"
             >
               <option value=""></option>
-              {state.category.map((cate) => {
-                return (
-                  <option key={cate.id} value={cate.name}>
-                    {cate.icon}
-                    {cate.name}
-                  </option>
-                );
+              {state.category.map((cat) => {
+                if (optionExpense === cat.type) {
+                  return (
+                    <option key={cat.id} value={cat.name}>
+                      {cat.icon}
+                      {cat.name}
+                    </option>
+                  );
+                }
               })}
             </select>
           </div>
@@ -146,6 +147,7 @@ const ExpenseForm = () => {
             <label htmlFor="amount" className="text-sm text-light">
               Set Date:
             </label>
+            {/* button today, yesterday */}
             <input
               type="date"
               name="date"

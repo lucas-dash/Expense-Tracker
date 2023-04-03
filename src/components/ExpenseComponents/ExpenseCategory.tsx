@@ -1,7 +1,13 @@
-import useTransaction from '../../Context/TransactionContex';
+import { CategoryFilterType } from '../../Types';
 import Transaction from '../Transaction';
 
-const ExpenseCategory = () => {
+type ExpenseCategoryProps = {
+  categoryFilter: [CategoryFilterType[], CategoryFilterType[]];
+};
+
+const ExpenseCategory = ({ categoryFilter }: ExpenseCategoryProps) => {
+  const [outcomeCat, incomeCat] = categoryFilter;
+
   return (
     <section className="flex flex-col items-center mt-10">
       <h2 className="text-dark dark:text-light font-bold my-3">Category</h2>
@@ -23,7 +29,11 @@ const ExpenseCategory = () => {
       {/* category summary */}
       <article className="w-full bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG">
         {/* map this */}
-        <ul>{/* <Transaction /> */}</ul>
+        <ul>
+          {outcomeCat.map((category, index) => {
+            return <Transaction key={index} filterCategory={category} />;
+          })}
+        </ul>
       </article>
     </section>
   );

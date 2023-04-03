@@ -11,4 +11,10 @@ export interface CategoryType {
   id: number;
   icon: string;
   name: string;
+  type: string;
 }
+
+export type CategoryFilterType = {
+  categoryName: string;
+  allExpense: number[];
+};
