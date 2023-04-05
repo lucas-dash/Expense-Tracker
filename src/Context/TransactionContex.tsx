@@ -1,6 +1,7 @@
 // hooks
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -10,7 +11,7 @@ import React, {
 import expenseReducer from './expenseReducer';
 import useLocalStorage from '../useLocalStorage';
 // types
-import { CategoryType, ExpenseType, CategoryFilterType } from '../Types';
+import { CategoryType, ExpenseType } from '../Types';
 
 type initStateType = {
   transactions: ExpenseType[];
@@ -28,7 +29,6 @@ type ReturnWealth = {
   outcome: ExpenseType[];
   income: ExpenseType[];
   totalWealth: number;
-  categoryFilter: [CategoryFilterType[], CategoryFilterType[]];
 };
 
 const useTransactionContext = (): UseTransactionContextType => {
@@ -52,16 +52,19 @@ const useTransactionContext = (): UseTransactionContextType => {
   });
 
   //? actions
-  const addTransaction = (expense: ExpenseType) => {
-    dispatch({ type: 'ADD_TRANSACTION', payload: expense });
-  };
+  const addTransaction = useCallback(
+    (expense: ExpenseType) => {
+      dispatch({ type: 'ADD_TRANSACTION', payload: expense });
+    },
+    [dispatch]
+  );
 
-  const removeTransaction = (expense: ExpenseType) => {
-    dispatch({ type: 'REMOVE_TRANSACTION', payload: expense });
-  };
-
-  // todo useMemo or callback, optimalization
-  // todo refactor
+  const removeTransaction = useCallback(
+    (expense: ExpenseType) => {
+      dispatch({ type: 'REMOVE_TRANSACTION', payload: expense });
+    },
+    [dispatch]
+  );
 
   const getFilterMoney = () => {
     const outcome = useMemo(() => {
@@ -84,49 +87,7 @@ const useTransactionContext = (): UseTransactionContextType => {
       return incom - outcom;
     }, [income, outcome]);
 
-    const categoryFilter = useMemo(() => {
-      const outcomeCategories: { [categoryName: string]: number[] } = {};
-      const incomeCategories: { [categoryName: string]: number[] } = {};
-
-      outcome.forEach((transaction) => {
-        const { category, amount } = transaction;
-        if (outcomeCategories[category]) {
-          outcomeCategories[category].push(amount);
-        } else {
-          outcomeCategories[category] = [amount];
-        }
-      });
-
-      income.forEach((transaction) => {
-        const { category, amount } = transaction;
-        if (incomeCategories[category]) {
-          incomeCategories[category].push(amount);
-        } else {
-          incomeCategories[category] = [amount];
-        }
-      });
-
-      const outcomeCategory: CategoryFilterType[] = Object.entries(
-        outcomeCategories
-      ).map(([categoryName, allExpense]) => ({
-        categoryName,
-        allExpense,
-      }));
-
-      const incomeCategory: CategoryFilterType[] = Object.entries(
-        incomeCategories
-      ).map(([categoryName, allExpense]) => ({
-        categoryName,
-        allExpense,
-      }));
-
-      return [outcomeCategory, incomeCategory] as [
-        CategoryFilterType[],
-        CategoryFilterType[]
-      ];
-    }, [income, outcome]);
-
-    return { outcome, income, totalWealth, categoryFilter };
+    return { outcome, income, totalWealth };
   };
 
   useEffect(() => {

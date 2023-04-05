@@ -7,5 +7,9 @@ html {
 }
 
 .action-button {
-  @apply border-2 border-darkBG dark:border-light rounded-md px-1 py-0.5 flex items-center font-semibold hover:scale-x-105 transition-all duration-300;
+  @apply border-2 border-darkBG dark:border-light rounded-md px-1 py-0.5 flex items-center font-semibold hover:scale-105 transition-all duration-300;
+}
+
+.active-Money {
+  @apply bg-light transition-all duration-75;
 }

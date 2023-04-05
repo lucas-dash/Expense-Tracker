@@ -1,22 +1,21 @@
 import { TiDelete } from 'react-icons/ti';
-import { CategoryType, ExpenseType, CategoryFilterType } from '../Types';
+import { ExpenseType, CategoryFilterType } from '../Types';
+import { currencyFormater } from '../utils/helperFunc';
+import { useMemo } from 'react';
 
 type TransactionPropType = {
   expense?: ExpenseType;
   remove?: (expense: ExpenseType) => void;
   filterCategory?: CategoryFilterType;
+  typeExpense?: string;
 };
 
 const Transaction = ({
   expense,
   remove,
   filterCategory,
+  typeExpense,
 }: TransactionPropType) => {
-  // todo formate Date and amount
-  // todo upcoming transaction
-  // todo minus or plus on category
-  // todo income or outcome category
-
   {
     if (expense && remove) {
       const { amount, category, date, type, note } = expense;
@@ -26,24 +25,17 @@ const Transaction = ({
           <div className="flex gap-3 items-center">
             <span className="w-7 h-7 rounded-full bg-accent-200"></span>
             <div className="flex items-start flex-col justify-center">
-              {/* name */}
               <h4 className="md:text-lg dark:text-dark">{category}</h4>
-              {/* <h4 className="md:text-lg dark:text-dark">Food & drinks</h4> */}
-              {/* count of transaction */}
-              {/* only in category, in expense date */}
               <p className="text-sm text-descript">{date}</p>
-              {/* <p className="text-sm text-descript">2 transaction</p> */}
             </div>
           </div>
 
           <div className="flex gap-1">
-            {/* if + green if - red */}
-            {/* category: all money in the category */}
-            <p className="md:text-lg dark:text-dark">
-              {type === 'Outcome' ? `-${amount}` : amount} Kč
+            <p className="md:text-lg dark:text-dark font-medium">
+              {type === 'Outcome'
+                ? `-${currencyFormater(amount)}`
+                : currencyFormater(amount)}
             </p>
-            {/* <p className="md:text-lg dark:text-dark">-3902 Kč</p> */}
-            {/* show if is transaction */}
             <button
               className="cursor-pointer text-darkBG"
               onClick={() => remove(expense)}
@@ -53,27 +45,32 @@ const Transaction = ({
           </div>
         </li>
       );
-    } else if (filterCategory) {
+    } else if (filterCategory && typeExpense) {
       const { categoryName, allExpense } = filterCategory;
 
-      const totalInCategory = allExpense.reduce((prev, acc) => acc + prev, 0);
+      const totalInCategory = useMemo(
+        () => allExpense.reduce((prev, acc) => acc + prev, 0),
+        [allExpense]
+      );
 
       return (
         <li className="flex justify-between items-center gap-4 font-nunito">
           <div className="flex gap-3 items-center">
             <span className="w-7 h-7 rounded-full bg-accent-200"></span>
             <div className="flex items-start flex-col justify-center">
-              {/* name */}
               <h4 className="md:text-lg dark:text-dark">{categoryName}</h4>
-              {/* count of transaction */}
-              <p className="text-sm text-descript">{allExpense.length}</p>
+              <p className="text-sm text-descript">
+                {allExpense.length} transaction
+              </p>
             </div>
           </div>
 
           <div className="flex gap-1">
-            {/* if + green if - red */}
-            {/* category: all money in the category */}
-            <p className="md:text-lg dark:text-dark">{totalInCategory} Kč</p>
+            <p className="md:text-lg dark:text-dark font-medium">
+              {typeExpense === 'outcome'
+                ? '-' + currencyFormater(totalInCategory)
+                : currencyFormater(totalInCategory)}
+            </p>
           </div>
         </li>
       );

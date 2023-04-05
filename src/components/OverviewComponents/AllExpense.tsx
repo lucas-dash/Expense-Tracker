@@ -1,12 +1,16 @@
 import { HiPlusSmall } from 'react-icons/hi2';
-import Transaction from '../Transaction';
-import useTransaction from '../../Context/TransactionContex';
 import { Link } from 'react-router-dom';
+// types
+import { ExpenseType } from '../../Types';
+// hooks
+import Transaction from '../Transaction';
 
-const AllExpense = () => {
-  const { state, removeTransaction } = useTransaction();
-  console.log(state.transactions);
+type AllExpenseProps = {
+  allExpense: ExpenseType[];
+  removeTransaction: (expense: ExpenseType) => void;
+};
 
+const AllExpense = ({ allExpense, removeTransaction }: AllExpenseProps) => {
   return (
     <article className="w-full min-w-max bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG">
       <div className="flex justify-between pb-2">
@@ -22,7 +26,7 @@ const AllExpense = () => {
       </div>
 
       <ul>
-        {state.transactions.map((expense) => {
+        {allExpense.map((expense) => {
           return (
             <Transaction
               expense={expense}
