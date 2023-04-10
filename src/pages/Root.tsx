@@ -4,7 +4,7 @@ import { Navbar } from '../components/Navbar';
 const Root = () => {
   return (
     <div
-      className="h-screen dark:text-white"
+      className=" h-screen dark:text-white"
       style={{
         background:
           'linear-gradient(120deg, rgba(234,234,237,0) 52%, rgba(223,129,212,0.5) 100%)',

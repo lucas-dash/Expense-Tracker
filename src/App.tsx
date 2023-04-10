@@ -19,7 +19,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<Overview />} />
-      <Route path="tracker" element={<TrackerPage />}></Route>
+      <Route path="tracker" element={<TrackerPage />} />
       <Route path="budgets" element={<BudgetsPage />} />
       <Route path="addExpense" element={<ExpenseForm />} />
     </Route>
@@ -29,7 +29,7 @@ const router = createBrowserRouter(
 const App = () => {
   return (
     <TransactionProvider>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </TransactionProvider>
   );
 };
