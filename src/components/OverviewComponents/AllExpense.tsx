@@ -1,16 +1,21 @@
 import { HiPlusSmall } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 // types
-import { ExpenseType } from '../../Types';
+import { ExpenseType, categoryColorType } from '../../Types';
 // hooks
 import Transaction from '../Transaction';
 
 type AllExpenseProps = {
   allExpense: ExpenseType[];
   removeTransaction: (expense: ExpenseType) => void;
+  categoryColor: categoryColorType[];
 };
 
-const AllExpense = ({ allExpense, removeTransaction }: AllExpenseProps) => {
+const AllExpense = ({
+  allExpense,
+  removeTransaction,
+  categoryColor,
+}: AllExpenseProps) => {
   return (
     <article className="w-full min-w-max bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG">
       <div className="flex justify-between pb-2">
@@ -32,6 +37,7 @@ const AllExpense = ({ allExpense, removeTransaction }: AllExpenseProps) => {
               expense={expense}
               remove={removeTransaction}
               key={expense.id}
+              categoryColor={categoryColor}
             />
           );
         })}

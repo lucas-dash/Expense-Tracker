@@ -12,9 +12,16 @@ export interface CategoryType {
   icon: string;
   name: string;
   type: string;
+  color: string;
 }
 
 export type CategoryFilterType = {
   categoryName: string;
   allExpense: number[];
+};
+
+export type categoryColorType = {
+  catName: string;
+  color: string;
+  icon: string;
 };

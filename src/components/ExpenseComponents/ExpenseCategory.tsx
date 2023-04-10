@@ -2,16 +2,21 @@
 import Transaction from '../Transaction';
 import { useMemo, useState } from 'react';
 // types
-import { ExpenseType } from '../../Types';
+import { ExpenseType, categoryColorType } from '../../Types';
 // helper func
 import { categoryFilter, currencyFormater } from '../../utils/helperFunc';
 
 type ExpenseCategoryProps = {
   outcome: ExpenseType[];
   income: ExpenseType[];
+  categoryColor: categoryColorType[];
 };
 
-const ExpenseCategory = ({ outcome, income }: ExpenseCategoryProps) => {
+const ExpenseCategory = ({
+  outcome,
+  income,
+  categoryColor,
+}: ExpenseCategoryProps) => {
   // ? true === Outcome / false === Income
   const [selectFlow, setSelectFlow] = useState(true);
 
@@ -73,6 +78,7 @@ const ExpenseCategory = ({ outcome, income }: ExpenseCategoryProps) => {
                     key={index}
                     filterCategory={category}
                     typeExpense="outcome"
+                    categoryColor={categoryColor}
                   />
                 );
               })
@@ -82,6 +88,7 @@ const ExpenseCategory = ({ outcome, income }: ExpenseCategoryProps) => {
                     key={index}
                     filterCategory={category}
                     typeExpense="income"
+                    categoryColor={categoryColor}
                   />
                 );
               })}

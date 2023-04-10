@@ -9,6 +9,12 @@ const Overview = () => {
 
   const allExpense = state.transactions;
 
+  const categoryColor = state.category.map((cate) => ({
+    catName: cate.name,
+    color: cate.color,
+    icon: cate.icon,
+  }));
+
   const { totalWealth, outcome } = getFilterMoney();
   return (
     <main className="font-nunito w-11/12 mx-auto ">
@@ -18,6 +24,7 @@ const Overview = () => {
         <AllExpense
           allExpense={allExpense}
           removeTransaction={removeTransaction}
+          categoryColor={categoryColor}
         />
       </section>
     </main>
