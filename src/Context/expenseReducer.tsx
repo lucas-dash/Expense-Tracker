@@ -1,4 +1,4 @@
-import { CategoryType, ExpenseType } from '../Types';
+import { CategoryType, ExpenseType } from '../utils/Types';
 
 type initStateType = {
   transactions: ExpenseType[];

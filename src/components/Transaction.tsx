@@ -1,5 +1,9 @@
 import { TiDelete } from 'react-icons/ti';
-import { ExpenseType, CategoryFilterType, categoryColorType } from '../Types';
+import {
+  ExpenseType,
+  CategoryFilterType,
+  categoryColorType,
+} from '../utils/Types';
 import { currencyFormater } from '../utils/helperFunc';
 import { useMemo } from 'react';
 

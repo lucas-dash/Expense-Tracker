@@ -2,7 +2,7 @@
 import Transaction from '../Transaction';
 import { useMemo, useState } from 'react';
 // types
-import { ExpenseType, categoryColorType } from '../../Types';
+import { ExpenseType, categoryColorType } from '../../utils/Types';
 // helper func
 import { categoryFilter, currencyFormater } from '../../utils/helperFunc';
 
@@ -20,16 +20,16 @@ const ExpenseCategory = ({
   // ? true === Outcome / false === Income
   const [selectFlow, setSelectFlow] = useState(true);
 
-  // filter value for category
+  //? filter value for category
   const [outcomeCategory, incomeCategory] = categoryFilter(income, outcome);
 
-  // outcome summary
+  //? outcome summary
   const outcomeMoney = useMemo(
     () => outcome.reduce((prev, acc) => acc.amount + prev, 0),
     [outcome]
   );
 
-  // income summary
+  //? income summary
   const incomeMoney = useMemo(() => {
     return income.reduce((prev, acc) => acc.amount + prev, 0);
   }, [income]);
@@ -69,23 +69,23 @@ const ExpenseCategory = ({
       </article>
 
       {/* category summary */}
-      <article className="w-full bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG">
+      <article className="w-full bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG overflow-x-hidden">
         <ul>
           {selectFlow
-            ? outcomeCategory.map((category, index) => {
+            ? outcomeCategory.map((category) => {
                 return (
                   <Transaction
-                    key={index}
+                    key={category.id}
                     filterCategory={category}
                     typeExpense="outcome"
                     categoryColor={categoryColor}
                   />
                 );
               })
-            : incomeCategory.map((category, index) => {
+            : incomeCategory.map((category) => {
                 return (
                   <Transaction
-                    key={index}
+                    key={category.id}
                     filterCategory={category}
                     typeExpense="income"
                     categoryColor={categoryColor}

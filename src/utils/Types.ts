@@ -4,7 +4,7 @@ export type ExpenseType = {
   category: string;
   amount: number;
   date: string;
-  note?: string;
+  note: string;
 };
 
 export interface CategoryType {
@@ -16,6 +16,7 @@ export interface CategoryType {
 }
 
 export type CategoryFilterType = {
+  id: string;
   categoryName: string;
   allExpense: number[];
 };

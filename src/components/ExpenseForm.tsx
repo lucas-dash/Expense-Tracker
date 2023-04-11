@@ -2,66 +2,68 @@
 import { HiPlusSmall } from 'react-icons/hi2';
 import { v4 as uuidv4 } from 'uuid';
 // hooks
-import { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import useTransaction from '../Context/TransactionContex';
 // types
-import { ExpenseType } from '../Types';
+import { ExpenseType } from '../utils/Types';
 
 const expenseOption: [string, string] = ['Outcome', 'Income'];
 
 const ExpenseForm = () => {
   const { state, addTransaction } = useTransaction();
-
   const navigate = useNavigate();
 
+  //! state
+  const [amount, setAmout] = useState('');
+  const [categoryName, setCategoryName] = useState('');
+  const [date, setDate] = useState('');
+  const [note, setNote] = useState('');
+
   //! outcome or income
-  const [optionExpense, setOptionExpense] = useState<string>('Outcome');
-  //! refs
-  const categoryRef = useRef<HTMLSelectElement>(null);
-  const amountRef = useRef<HTMLInputElement>(null);
-  const dateRef = useRef<HTMLInputElement>(null);
-  const noteRef = useRef<HTMLInputElement>(null);
+  const [transactionType, setTransactionType] = useState<string>('Outcome');
 
   const handleOptionChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
-    setOptionExpense(target.value);
+    setTransactionType(target.value);
   };
 
   // ! submit
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (
-      amountRef.current?.value &&
-      categoryRef.current?.value &&
-      dateRef.current?.value
-    ) {
+    if (amount && date && categoryName) {
       const newExpense: ExpenseType = {
         id: uuidv4(),
-        type: optionExpense,
-        category: categoryRef.current?.value,
-        amount: Number(amountRef.current?.value),
-        date: dateRef.current?.value,
-        note: noteRef.current?.value,
+        type: transactionType,
+        amount: Number(amount),
+        category: categoryName,
+        date,
+        note,
       };
 
       addTransaction(newExpense);
 
-      categoryRef.current.value = '';
-      amountRef.current.value = '';
-      dateRef.current.value = '';
-      if (noteRef.current?.value) {
-        noteRef.current.value = '';
-      }
+      setAmout('');
+      setCategoryName('');
+      setDate('');
+      setNote('');
     }
   }
+
+  //? date formater
+  const formattedDate = new Date().toISOString().substr(0, 10);
+
+  const tomorrow = new Date(formattedDate);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const formattedTomorrow = tomorrow.toISOString().substr(0, 10);
 
   return (
     <article className="bg-transparent flex items-center justify-center">
       <form
-        className="bg-gradient-to-br from-accent-200 to-accent-100 w-72 gap-5 p-5 
+        className="bg-gradient-to-br from-accent-200 to-accent-100 w-4/5 max-w-sm gap-5 p-6 
       rounded-xl"
         onSubmit={handleSubmit}
       >
@@ -74,14 +76,16 @@ const ExpenseForm = () => {
           </div>
         </label>
 
-        <div className=" flex justify-around mb-3">
+        <div className=" flex justify-evenly mb-3">
           {expenseOption.map((option, i) => {
             return (
               <label
                 key={i}
                 htmlFor={option}
                 className={`cursor-pointer rounded-xl px-3 font-medium border-2 border-light transition-all duration-200 ease-out ${
-                  optionExpense === option ? 'bg-light text-dark' : 'text-light'
+                  transactionType === option
+                    ? 'bg-light text-dark'
+                    : 'text-light'
                 }`}
               >
                 <input
@@ -89,7 +93,7 @@ const ExpenseForm = () => {
                   name={option}
                   id={option}
                   value={option}
-                  checked={option === optionExpense}
+                  checked={option === transactionType}
                   onChange={handleOptionChange}
                   className="hidden"
                 />
@@ -110,8 +114,10 @@ const ExpenseForm = () => {
               name="amount"
               id="amount"
               min={0}
-              ref={amountRef}
-              placeholder="0$"
+              value={amount}
+              onChange={({ target }) => setAmout(target.value)}
+              placeholder="0 Kč"
+              aria-label="set your amount of money"
               required
               className="rounded-lg focus:outline-dark p-0.5 placeholder:text-dark"
             />
@@ -125,15 +131,17 @@ const ExpenseForm = () => {
             <select
               name="category"
               id="category"
-              ref={categoryRef}
+              value={categoryName}
+              aria-label="Select expense category"
+              onChange={({ target }) => setCategoryName(target.value)}
               required
               className="rounded-lg focus:outline-dark p-0.5 placeholder:text-dark"
             >
               <option value=""></option>
               {state.category.map((cat) => {
-                if (optionExpense === cat.type) {
+                if (transactionType === cat.type) {
                   return (
-                    <option key={cat.id} value={cat.name}>
+                    <option key={cat.id} value={cat.name} aria-label={cat.name}>
                       {cat.icon}
                       {cat.name}
                     </option>
@@ -144,14 +152,33 @@ const ExpenseForm = () => {
           </div>
 
           <div className="flex flex-col">
+            {/* button today, yesterday */}
             <label htmlFor="amount" className="text-sm text-light">
               Set Date:
             </label>
-            {/* button today, yesterday */}
+            <div className="flex gap-2 py-2">
+              <button
+                type="button"
+                onClick={() => setDate(formattedDate)}
+                className="text-light text-sm font-medium border-2 border-light rounded-2xl p-0.5 px-1 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out"
+              >
+                Today
+              </button>
+              <button
+                type="button"
+                onClick={() => setDate(formattedTomorrow)}
+                className="text-light text-sm font-medium border-2 border-light rounded-2xl p-0.5 px-1 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out"
+              >
+                Tommorow
+              </button>
+            </div>
+
             <input
               type="date"
               name="date"
-              ref={dateRef}
+              value={date}
+              aria-label="set date"
+              onChange={({ target }) => setDate(target.value)}
               required
               className="p-0.5 rounded-lg focus:outline-dark"
             />
@@ -164,15 +191,19 @@ const ExpenseForm = () => {
             <input
               type="text"
               name="note"
-              ref={noteRef}
+              value={note}
+              aria-label="optional select note"
+              onChange={({ target }) => setNote(target.value)}
               placeholder="Add notes..."
               className="focus:outline-dark p-0.5 rounded-lg"
             />
           </div>
 
           <button
+            disabled={amount && categoryName && date ? false : true}
             type="submit"
-            className="border-2 border-light dark:border-darkBG rounded-md px-1 py-0.5 font-semibold hover:scale-x-105 hover:bg-dark transition-all duration-300 text-center text-light mt-1.5"
+            aria-label="add transaction"
+            className="border-2 border-light dark:border-darkBG rounded-md px-1 py-0.5 font-semibold hover:scale-x-105 hover:bg-dark transition-all duration-300 text-center text-light mt-1.5 disabled:bg-descript disabled:opacity-60"
           >
             add
           </button>

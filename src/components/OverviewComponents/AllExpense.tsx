@@ -1,7 +1,7 @@
 import { HiPlusSmall } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 // types
-import { ExpenseType, categoryColorType } from '../../Types';
+import { ExpenseType, categoryColorType } from '../../utils/Types';
 // hooks
 import Transaction from '../Transaction';
 
@@ -17,7 +17,7 @@ const AllExpense = ({
   categoryColor,
 }: AllExpenseProps) => {
   return (
-    <article className="w-full min-w-max bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG max-h-[300px] overflow-scroll">
+    <article className="w-full min-w-max bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG max-h-[300px] overflow-scroll overflow-x-hidden">
       <div className="flex justify-between pb-2">
         <h2 className="text-dark font-bold">Last Transaction:</h2>
         <Link

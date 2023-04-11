@@ -9,9 +9,9 @@ import React, {
 } from 'react';
 // components
 import expenseReducer from './expenseReducer';
-import useLocalStorage from '../useLocalStorage';
+import useLocalStorage from '../utils/useLocalStorage';
 // types
-import { CategoryType, ExpenseType } from '../Types';
+import { CategoryType, ExpenseType } from '../utils/Types';
 
 type initStateType = {
   transactions: ExpenseType[];

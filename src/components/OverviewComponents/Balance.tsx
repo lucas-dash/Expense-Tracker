@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ExpenseType } from '../../Types';
+import { ExpenseType } from '../../utils/Types';
 import { currencyFormater } from '../../utils/helperFunc';
 
 type BalanceProps = {
