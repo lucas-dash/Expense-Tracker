@@ -6,6 +6,8 @@ import useTransaction from '../Context/TransactionContex';
 const TrackerPage = () => {
   const { state, getFilterMoney } = useTransaction();
 
+  // todo today cashflow
+
   const { outcome, income, totalWealth } = getFilterMoney();
 
   const categoryColor = state.category.map((cate) => ({
@@ -15,7 +17,7 @@ const TrackerPage = () => {
   }));
 
   return (
-    <main className="font-nunito  dark:text-light text-dark w-11/12 mx-auto">
+    <main className="font-nunito  dark:text-light text-dark w-11/12 mx-auto pb-5">
       <TrackerBalance totalWealth={totalWealth} />
       <ExpenseCategory
         outcome={outcome}

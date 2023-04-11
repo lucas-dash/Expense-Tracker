@@ -3,13 +3,7 @@ import { Navbar } from '../components/Navbar';
 
 const Root = () => {
   return (
-    <div
-      className=" h-screen dark:text-white"
-      style={{
-        background:
-          'linear-gradient(120deg, rgba(234,234,237,0) 52%, rgba(223,129,212,0.5) 100%)',
-      }}
-    >
+    <div className="h-screen dark:text-white">
       <Navbar />
       <Outlet />
       <div className="absolute inset-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
