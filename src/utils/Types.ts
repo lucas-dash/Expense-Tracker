@@ -7,13 +7,13 @@ export type ExpenseType = {
   note: string;
 };
 
-export interface CategoryType {
+export type CategoryType = {
   id: number;
   icon: string;
   name: string;
   type: string;
   color: string;
-}
+};
 
 export type CategoryFilterType = {
   id: string;
@@ -25,4 +25,11 @@ export type categoryColorType = {
   catName: string;
   color: string;
   icon: string;
+};
+
+export type BudgetsType = {
+  id: string;
+  name: string;
+  limit: number;
+  category: string[];
 };

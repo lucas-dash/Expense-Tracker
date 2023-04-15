@@ -11,18 +11,15 @@ import React, {
 import expenseReducer from './expenseReducer';
 import useLocalStorage from '../utils/useLocalStorage';
 // types
-import { CategoryType, ExpenseType } from '../utils/Types';
-
-type initStateType = {
-  transactions: ExpenseType[];
-  category: CategoryType[];
-};
+import { BudgetsType, CategoryType, ExpenseType } from '../utils/Types';
+import { initStateType } from './expenseReducer';
 
 type UseTransactionContextType = {
   state: initStateType;
   addTransaction: (expense: ExpenseType) => void;
   removeTransaction: (expense: ExpenseType) => void;
   getFilterMoney: () => ReturnWealth;
+  addBudget: (budget: BudgetsType) => void;
 };
 
 type ReturnWealth = {
@@ -52,9 +49,12 @@ const useTransactionContext = (): UseTransactionContextType => {
     { id: 7, icon: '💼', name: 'Bussines', type: 'Income', color: '#E44D26' },
   ]);
 
+  const [budgets, setBudgets] = useLocalStorage<BudgetsType[]>('budgets', []);
+
   const [state, dispatch] = useReducer(expenseReducer, {
     transactions,
     category,
+    budgets,
   });
 
   //? actions
@@ -96,12 +96,23 @@ const useTransactionContext = (): UseTransactionContextType => {
     return { outcome, income, totalWealth };
   };
 
+  const addBudget = (budget: BudgetsType) => {
+    dispatch({ type: 'ADD_BUDGET', payload: budget });
+  };
+
   useEffect(() => {
     setTransactions(state.transactions);
     setCategory(state.category);
-  }, [state.transactions, state.category]);
+    setBudgets(state.budgets);
+  }, [state.transactions, state.category, state.budgets]);
 
-  return { state, addTransaction, removeTransaction, getFilterMoney };
+  return {
+    state,
+    addTransaction,
+    removeTransaction,
+    getFilterMoney,
+    addBudget,
+  };
 };
 
 type ProviderType = {
