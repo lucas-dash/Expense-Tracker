@@ -136,6 +136,7 @@ type UseTransactionHook = {
   addTransaction: (expense: ExpenseType) => void;
   removeTransaction: (expense: ExpenseType) => void;
   getFilterMoney: () => ReturnWealth;
+  addBudget: (budget: BudgetsType) => void;
 };
 
 const useTransaction = (): UseTransactionHook => {

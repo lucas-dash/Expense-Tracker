@@ -3,7 +3,7 @@ import useTransaction from '../../Context/TransactionContex';
 const Budget = () => {
   const { state, getFilterMoney } = useTransaction();
   const { outcome } = getFilterMoney();
-  console.log(outcome);
+  // console.log(outcome);
 
   return (
     <article className="border-2 border-progress rounded-lg w-[320px] p-4 shadow-2xl shadow-descript dark:shadow-dark min-w-max">

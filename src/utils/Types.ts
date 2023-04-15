@@ -31,5 +31,7 @@ export type BudgetsType = {
   id: string;
   name: string;
   limit: number;
-  category: string[];
+  categories: string[];
 };
+
+// { name: string }[]
