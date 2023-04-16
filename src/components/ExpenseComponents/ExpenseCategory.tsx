@@ -21,7 +21,7 @@ const ExpenseCategory = ({
   const [selectFlow, setSelectFlow] = useState(true);
 
   //? filter value for category
-  const [outcomeCategory, incomeCategory] = categoryFilter(income, outcome);
+  const [outcomeCategory, incomeCategory] = categoryFilter(outcome, income);
 
   //? outcome summary
   const outcomeMoney = useMemo(

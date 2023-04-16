@@ -20,6 +20,7 @@ type UseTransactionContextType = {
   removeTransaction: (expense: ExpenseType) => void;
   getFilterMoney: () => ReturnWealth;
   addBudget: (budget: BudgetsType) => void;
+  removeBudget: (budget: BudgetsType) => void;
 };
 
 type ReturnWealth = {
@@ -100,6 +101,10 @@ const useTransactionContext = (): UseTransactionContextType => {
     dispatch({ type: 'ADD_BUDGET', payload: budget });
   };
 
+  const removeBudget = (budget: BudgetsType) => {
+    dispatch({ type: 'REMOVE_BUDGET', payload: budget });
+  };
+
   useEffect(() => {
     setTransactions(state.transactions);
     setCategory(state.category);
@@ -112,6 +117,7 @@ const useTransactionContext = (): UseTransactionContextType => {
     removeTransaction,
     getFilterMoney,
     addBudget,
+    removeBudget,
   };
 };
 
@@ -137,6 +143,7 @@ type UseTransactionHook = {
   removeTransaction: (expense: ExpenseType) => void;
   getFilterMoney: () => ReturnWealth;
   addBudget: (budget: BudgetsType) => void;
+  removeBudget: (budget: BudgetsType) => void;
 };
 
 const useTransaction = (): UseTransactionHook => {

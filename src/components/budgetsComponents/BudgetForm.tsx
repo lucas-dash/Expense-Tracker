@@ -36,10 +36,6 @@ const BudgetForm = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(categories);
-  }, [categories]);
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -77,7 +73,7 @@ const BudgetForm = () => {
 
   return (
     <section
-      className={` border-darkBG border-2 dark:border-light rounded-xl bg-light/70 dark:bg-light/30 dark:text-dark p-4 w-2/4 min-w-max mx-auto mb-8 shadow-2xl shadow-descript dark:shadow-dark overflow-hidden ${
+      className={` border-darkBG border-2 dark:border-light rounded-xl bg-light/60 dark:bg-light/30 dark:text-dark p-4 w-2/4 min-w-max mx-auto mb-8 shadow-2xl shadow-descript dark:shadow-dark overflow-hidden ${
         showForm
           ? 'h-[295px] sm:h-64 transition-all duration-500'
           : 'h-16 transition-all duration-500 border-dashed'

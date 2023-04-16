@@ -16,23 +16,6 @@ const ACTION = {
   REMOVE_BUDGET: 'REMOVE_BUDGET',
 };
 
-// interface AddTransactionAction {
-//   type: typeof ACTION.ADD_TRANSACTION;
-//   payload: ExpenseType;
-// }
-
-// interface RemoveTransactionAction {
-//   type: typeof ACTION.REMOVE_TRANSACTION;
-//   payload: ExpenseType;
-// }
-
-// interface AddBudgetAction {
-//   type: typeof ACTION.ADD_BUDGET;
-//   payload: BudgetsType;
-// }
-
-// type ReducerAction = AddTransactionAction | RemoveTransactionAction | AddBudgetAction;
-
 export type ReducerAction = {
   type: string;
   payload: ExpenseType | BudgetsType;
@@ -65,6 +48,14 @@ const expenseReducer = (
           budgets: [...state.budgets, action.payload],
         };
       }
+
+    case ACTION.REMOVE_BUDGET:
+      return {
+        ...state,
+        budgets: state.budgets.filter(
+          (budget) => budget.id !== action.payload.id
+        ),
+      };
 
     default:
       throw new Error('action is not match ' + action.type);
