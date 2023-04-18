@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { CategoryFilterType, ExpenseType } from './Types';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -95,4 +95,41 @@ export const getTotalFromBudget = (
   }, [budgetTransaction]);
 
   return { total, allTransaction };
+};
+
+type checkColorProgressType = {
+  width: string;
+  color: string;
+};
+export const checkColorProgressBar = (
+  current: number,
+  max: number
+): checkColorProgressType => {
+  const percentage = Math.floor((current / max) * 100);
+
+  if (percentage <= 25) {
+    return { width: `${percentage}%`, color: 'bg-income' };
+  } else if (percentage <= 50) {
+    return { width: `${percentage}%`, color: 'bg-yellow-500' };
+  } else if (percentage <= 85) {
+    return { width: `${percentage}%`, color: 'bg-progress' };
+  } else {
+    return { width: `${percentage}%`, color: 'bg-outcome' };
+  }
+};
+
+export const getWelcomeText = () => {
+  const timeNow = new Date().getHours();
+
+  if (timeNow <= 11 && timeNow >= 6) {
+    return 'Good Morning!';
+  } else if (timeNow > 11 && timeNow <= 18) {
+    return 'Good Afternoon!';
+  } else if (timeNow > 18 && timeNow <= 24) {
+    return 'Good Evening!';
+  } else if (timeNow >= 0 && timeNow <= 5) {
+    return 'Good night!';
+  } else {
+    return 'Have a Nice Day!';
+  }
 };

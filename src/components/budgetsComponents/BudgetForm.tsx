@@ -36,10 +36,12 @@ const BudgetForm = () => {
     }
   };
 
+  const canAdd = name && limit && categories.length > 0;
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (name && limit && categories.length > 0) {
+    if (canAdd) {
       const newBudget: BudgetsType = {
         id: uuidv4(),
         name: name.trim(),
@@ -118,7 +120,7 @@ const BudgetForm = () => {
               <button
                 type="button"
                 onClick={() => setIsOpenCategories((prev) => !prev)}
-                className="inline-flex justify-center items-center gap-1 w-full rounded-lg border border-descript shadow-sm p-0.5 bg-white text-base font-medium text-descript hover:bg-gray-50 focus:ring-dark focus:outline-offset-1 focus:ring-1"
+                className="inline-flex justify-center items-center gap-1 w-full rounded-lg border border-descript shadow-sm p-0.5 bg-white text-base font-medium text-descript hover:bg-gray-50 focus:ring-dark focus:outline-offset-1 focus:ring-1 focus:text-dark"
                 id="menu-button"
                 aria-expanded="true"
                 aria-haspopup="true"
@@ -185,6 +187,7 @@ const BudgetForm = () => {
               id="limit"
               min="0"
               inputMode="decimal"
+              aria-label="Set your limir for budget"
               placeholder="1000 Kč"
               value={limit}
               onChange={({ target }) => setLimit(target.value)}
@@ -194,10 +197,11 @@ const BudgetForm = () => {
 
           <button
             type="submit"
-            disabled={name && limit && categories.length > 0 ? false : true}
+            disabled={canAdd ? false : true}
+            aria-label="Add Budget"
             className="border-2 border-darkBG rounded-md px-1 py-0.5 font-semibold hover:scale-x-105 hover:bg-dark transition-all duration-300 text-center dark:text-light hover:text-light mt-1.5 disabled:bg-descript disabled:opacity-60 sm:col-span-2 w-4/5 mx-auto"
           >
-            Add
+            Add Budget
           </button>
         </div>
       </form>
