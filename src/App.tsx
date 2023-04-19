@@ -14,6 +14,10 @@ import Overview from './pages/Overview';
 import ExpenseForm from './components/ExpenseForm';
 import { TransactionProvider } from './Context/TransactionContex';
 
+//toastify library
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // browser router setup
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +34,7 @@ const App = () => {
   return (
     <TransactionProvider>
       <RouterProvider router={router} />
+      <ToastContainer />
     </TransactionProvider>
   );
 };

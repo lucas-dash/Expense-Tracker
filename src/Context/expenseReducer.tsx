@@ -1,4 +1,7 @@
+// Types
 import { BudgetsType, CategoryType, ExpenseType } from '../utils/Types';
+// toastify library
+import { toast } from 'react-toastify';
 
 export type initStateType = {
   transactions: ExpenseType[];
@@ -28,6 +31,7 @@ const expenseReducer = (
   switch (action.type) {
     case ACTION.ADD_TRANSACTION:
       if ('date' in action.payload) {
+        toast.success('New transaction added!');
         return {
           ...state,
           transactions: [...state.transactions, action.payload],
@@ -35,6 +39,7 @@ const expenseReducer = (
       }
 
     case ACTION.REMOVE_TRANSACTION:
+      toast.success('Transaction has been deleted!');
       return {
         ...state,
         transactions: state.transactions.filter(
@@ -43,6 +48,7 @@ const expenseReducer = (
       };
     case ACTION.ADD_BUDGET:
       if ('limit' in action.payload) {
+        toast.success('New Budget added!');
         return {
           ...state,
           budgets: [...state.budgets, action.payload],
@@ -50,6 +56,7 @@ const expenseReducer = (
       }
 
     case ACTION.REMOVE_BUDGET:
+      toast.success('Budget has been deleted!');
       return {
         ...state,
         budgets: state.budgets.filter(

@@ -27,7 +27,7 @@ const Transaction = ({
       const { amount, category, date, type, note } = expense;
 
       return (
-        <li className="flex justify-between items-center gap-4 font-nunito odd:bg-descript/30 rounded-xl px-1">
+        <li className="flex justify-between items-center gap-4 font-nunito odd:bg-descript/30 rounded-xl px-2">
           {categoryColor.map((cat, index) => {
             if (cat.catName === category) {
               return (
@@ -72,7 +72,7 @@ const Transaction = ({
       );
 
       return (
-        <li className="flex justify-between items-center gap-4 font-nunito odd:bg-descript/30 rounded-xl px-1">
+        <li className="flex justify-between items-center gap-4 font-nunito odd:bg-descript/30 rounded-xl px-2">
           {categoryColor.map((cat, index) => {
             if (filterCategory.categoryName === cat.catName) {
               return (
