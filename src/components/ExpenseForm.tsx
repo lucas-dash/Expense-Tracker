@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 import useTransaction from '../Context/TransactionContex';
 // types
 import { ExpenseType } from '../utils/Types';
+import { formatDate } from '../utils/helperFunc';
 
 const expenseOption: [string, string] = ['Outcome', 'Income'];
 
@@ -39,8 +40,8 @@ const ExpenseForm = () => {
         type: transactionType,
         amount: Number(amount),
         category: categoryName,
-        date,
-        note,
+        date: formatDate(date),
+        note: note.trim(),
       };
 
       addTransaction(newExpense);
@@ -53,12 +54,12 @@ const ExpenseForm = () => {
   }
 
   //? date formater
-  const formattedDate = new Date().toISOString().substr(0, 10);
+  const today = new Date().toISOString().substr(0, 10);
 
-  const tomorrow = new Date(formattedDate);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  const yesterdayFormat = new Date(today);
+  yesterdayFormat.setDate(yesterdayFormat.getDate() - 1);
 
-  const formattedTomorrow = tomorrow.toISOString().substr(0, 10);
+  const yesterday = yesterdayFormat.toISOString().substr(0, 10);
 
   return (
     <article className="bg-transparent flex items-center justify-center">
@@ -159,17 +160,17 @@ const ExpenseForm = () => {
             <div className="flex gap-2 py-2">
               <button
                 type="button"
-                onClick={() => setDate(formattedDate)}
+                onClick={() => setDate(today)}
                 className="text-light text-sm font-medium border-2 border-light rounded-2xl p-0.5 px-1 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out"
               >
                 Today
               </button>
               <button
                 type="button"
-                onClick={() => setDate(formattedTomorrow)}
+                onClick={() => setDate(yesterday)}
                 className="text-light text-sm font-medium border-2 border-light rounded-2xl p-0.5 px-1 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out"
               >
-                Tommorow
+                Yesterday
               </button>
             </div>
 

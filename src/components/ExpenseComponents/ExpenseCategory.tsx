@@ -70,7 +70,7 @@ const ExpenseCategory = ({
 
       {/* category summary */}
       <article className="w-full bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG overflow-x-hidden">
-        <ul>
+        <ul className="flex flex-col gap-2">
           {selectFlow
             ? outcomeCategory.map((category) => {
                 return (

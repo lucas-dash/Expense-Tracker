@@ -30,7 +30,7 @@ const AllExpense = ({
         </Link>
       </div>
 
-      <ul>
+      <ul className="flex flex-col gap-3">
         {allExpense.map((expense) => {
           return (
             <Transaction

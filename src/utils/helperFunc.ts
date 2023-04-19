@@ -12,6 +12,18 @@ export const currencyFormater = (num: number = 0) => {
   return formatter.format(num);
 };
 
+export const formatDate = (dateString: string): string => {
+  if (!dateString) {
+    return (dateString = '');
+  }
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+};
+
 /**
  * @param first outcome category!
  * @param second income category!
@@ -106,8 +118,9 @@ export const checkColorProgressBar = (
   max: number
 ): checkColorProgressType => {
   const percentage = Math.floor((current / max) * 100);
-
-  if (percentage <= 25) {
+  if (percentage >= 100) {
+    return { width: '100%', color: 'bg-outcome' };
+  } else if (percentage <= 25) {
     return { width: `${percentage}%`, color: 'bg-income' };
   } else if (percentage <= 50) {
     return { width: `${percentage}%`, color: 'bg-yellow-500' };

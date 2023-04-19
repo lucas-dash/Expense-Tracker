@@ -22,7 +22,7 @@ const Budget = ({ budget, category, removeBudget }: BudgetProps) => {
   const { width, color } = checkColorProgressBar(total, limit);
 
   return (
-    <article className="border-2 border-darkBG dark:border-progress rounded-lg w-[320px] p-4 shadow-2xl shadow-descript dark:shadow-dark min-w-max">
+    <article className="border-2 border-darkBG dark:border-progress rounded-lg w-[320px] p-4 shadow-2xl shadow-descript dark:shadow-dark min-w-[262px]">
       <div className="flex justify-between pb-2">
         <p className="text-center font-medium text-lg flex-1">{name}</p>
         <MdAdd
@@ -34,11 +34,11 @@ const Budget = ({ budget, category, removeBudget }: BudgetProps) => {
         />
       </div>
 
-      <div className="flex gap-2 mt-1">
+      <div className="flex items-center gap-2 my-1 w-full flex-wrap">
         {categories.map((category, index) => {
           return (
             <p
-              className="bg-descript/40 dark:bg-descript/60 rounded-lg px-1"
+              className="bg-descript/40 dark:bg-descript/50 rounded-lg px-1 text-center"
               key={index}
             >
               {category}
@@ -46,15 +46,15 @@ const Budget = ({ budget, category, removeBudget }: BudgetProps) => {
           );
         })}
       </div>
-
       <div className="flex flex-col items-end">
         <p>
           {currencyFormater(total)} / {currencyFormater(limit)}
         </p>
 
+        {/* progress bar */}
         <div className="w-full h-2 bg-blue-200 rounded-full mt-2">
           <div
-            className={`w-2/3 h-full text-center text-xs text-white rounded-full ${color}`}
+            className={`h-full text-center text-xs text-white rounded-full ${color}`}
             style={{ width: width }}
           ></div>
         </div>
