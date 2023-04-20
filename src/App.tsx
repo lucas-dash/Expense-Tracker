@@ -23,7 +23,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<Overview />} />
-      <Route path="tracker" element={<TrackerPage />} />
+      <Route path="tracker" element={<TrackerPage />}></Route>
       <Route path="budgets" element={<BudgetsPage />} />
       <Route path="addExpense" element={<ExpenseForm />} />
     </Route>

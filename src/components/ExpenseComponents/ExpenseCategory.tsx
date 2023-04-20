@@ -71,8 +71,11 @@ const ExpenseCategory = ({
       {/* category summary */}
       <article className="w-full bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG overflow-x-hidden">
         <ul className="flex flex-col gap-2">
-          {selectFlow
-            ? outcomeCategory.map((category) => {
+          {selectFlow ? (
+            outcomeCategory.length <= 0 ? (
+              <li className="text-center">No Transaction yet.</li>
+            ) : (
+              outcomeCategory.map((category) => {
                 return (
                   <Transaction
                     key={category.id}
@@ -82,16 +85,21 @@ const ExpenseCategory = ({
                   />
                 );
               })
-            : incomeCategory.map((category) => {
-                return (
-                  <Transaction
-                    key={category.id}
-                    filterCategory={category}
-                    typeExpense="income"
-                    categoryColor={categoryColor}
-                  />
-                );
-              })}
+            )
+          ) : incomeCategory.length <= 0 ? (
+            <li className="text-center">No Transaction yet.</li>
+          ) : (
+            incomeCategory.map((category) => {
+              return (
+                <Transaction
+                  key={category.id}
+                  filterCategory={category}
+                  typeExpense="income"
+                  categoryColor={categoryColor}
+                />
+              );
+            })
+          )}
         </ul>
       </article>
     </section>

@@ -31,16 +31,20 @@ const AllExpense = ({
       </div>
 
       <ul className="flex flex-col gap-3">
-        {allExpense.map((expense) => {
-          return (
-            <Transaction
-              expense={expense}
-              remove={removeTransaction}
-              key={expense.id}
-              categoryColor={categoryColor}
-            />
-          );
-        })}
+        {allExpense.length <= 0 ? (
+          <li className="text-center">No Transaction yet.</li>
+        ) : (
+          allExpense.map((expense) => {
+            return (
+              <Transaction
+                expense={expense}
+                remove={removeTransaction}
+                key={expense.id}
+                categoryColor={categoryColor}
+              />
+            );
+          })
+        )}
       </ul>
     </article>
   );
