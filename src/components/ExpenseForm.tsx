@@ -62,31 +62,25 @@ const ExpenseForm = () => {
   const yesterday = yesterdayFormat.toISOString().substr(0, 10);
 
   return (
-    <article className="bg-transparent flex items-center justify-center">
-      <form
-        className="bg-gradient-to-br from-accent-200 to-accent-100 w-4/5 max-w-sm gap-5 p-6 
-      rounded-xl"
-        onSubmit={handleSubmit}
-      >
-        <label className="flex items-end justify-end h-3">
-          <div
-            className="transform rotate-45 translate-x-3 inline-block cursor-pointer hover:scale-125 transition-all duration-300"
-            onClick={() => navigate(-1)}
-          >
-            <HiPlusSmall size={27} />
-          </div>
-        </label>
+    <section className="flex items-center justify-center border-darkBG border-2 dark:border-light rounded-xl bg-light/70 dark:bg-light/30 dark:text-dark p-5 w-2/4 min-w-[280px] max-w-sm mx-auto shadow-2xl shadow-descript dark:shadow-descript/20 overflow-hidden relative top-6">
+      <form className=" w-full " onSubmit={handleSubmit}>
+        <div className="absolute right-2 top-2" onClick={() => navigate(-1)}>
+          <HiPlusSmall
+            size={30}
+            className="rotate-45 cursor-pointer hover:scale-125 transition-all duration-300"
+          />
+        </div>
 
-        <div className=" flex justify-evenly mb-3">
+        <div className=" flex justify-evenly gap-3 mb-3 w-4/5 mx-auto">
           {expenseOption.map((option, i) => {
             return (
               <label
                 key={i}
                 htmlFor={option}
-                className={`cursor-pointer rounded-xl px-3 font-medium border-2 border-light transition-all duration-200 ease-out ${
+                className={`cursor-pointer rounded-xl px-3 font-medium border-2 border-dark dark:border-light transition-all duration-300 ease-out shadow-xl shadow-descript dark:shadow-none ${
                   transactionType === option
-                    ? 'bg-light text-dark'
-                    : 'text-light'
+                    ? 'bg-dark dark:bg-light text-light dark:text-dark '
+                    : 'text-descript'
                 }`}
               >
                 <input
@@ -107,28 +101,25 @@ const ExpenseForm = () => {
         <div className="flex flex-col gap-1 text-dark">
           {/* amount input */}
           <div className="flex flex-col">
-            <label htmlFor="amount" className="text-sm text-light">
-              Set Amount:
-            </label>
+            <label htmlFor="amount">Set Amount:</label>
             <input
               type="number"
               name="amount"
               id="amount"
+              step={0.5}
               min={0}
               value={amount}
               onChange={({ target }) => setAmout(target.value)}
               placeholder="0 Kč"
               aria-label="set your amount of money"
               required
-              className="rounded-lg focus:outline-dark p-0.5 placeholder:text-dark"
+              className="rounded-lg focus:outline-dark p-0.5 sm:w-auto border border-descript hover:bg-gray-50 placeholder:text-descript px-1"
             />
           </div>
 
           {/* option */}
           <div className="flex flex-col">
-            <label htmlFor="category" className="text-sm text-light">
-              Add Category:
-            </label>
+            <label htmlFor="category">Add Category:</label>
             <select
               name="category"
               id="category"
@@ -136,7 +127,7 @@ const ExpenseForm = () => {
               aria-label="Select expense category"
               onChange={({ target }) => setCategoryName(target.value)}
               required
-              className="rounded-lg focus:outline-dark p-0.5 placeholder:text-dark"
+              className="rounded-lg focus:outline-dark p-0.5 sm:w-auto border border-descript hover:bg-gray-50 placeholder:text-descript px-1"
             >
               <option value=""></option>
               {state.category.map((cat) => {
@@ -154,21 +145,19 @@ const ExpenseForm = () => {
 
           <div className="flex flex-col">
             {/* button today, yesterday */}
-            <label htmlFor="amount" className="text-sm text-light">
-              Set Date:
-            </label>
-            <div className="flex gap-2 py-2">
+            <label htmlFor="amount">Set Date:</label>
+            <div className="flex gap-2 pb-2">
               <button
                 type="button"
                 onClick={() => setDate(today)}
-                className="text-light text-sm font-medium border-2 border-light rounded-2xl p-0.5 px-1 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out"
+                className="text-sm dark:text-light font-medium border-2 border-dark dark:border-light rounded-2xl p-0.5 px-1 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out"
               >
                 Today
               </button>
               <button
                 type="button"
                 onClick={() => setDate(yesterday)}
-                className="text-light text-sm font-medium border-2 border-light rounded-2xl p-0.5 px-1 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out"
+                className="text-sm dark:text-light font-medium border-2 border-dark dark:border-light rounded-2xl p-0.5 px-1 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out"
               >
                 Yesterday
               </button>
@@ -181,14 +170,12 @@ const ExpenseForm = () => {
               aria-label="set date"
               onChange={({ target }) => setDate(target.value)}
               required
-              className="p-0.5 rounded-lg focus:outline-dark"
+              className="rounded-lg focus:outline-dark p-0.5 sm:w-auto border border-descript hover:bg-gray-50 placeholder:text-descript px-1"
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="amount" className="text-sm text-light">
-              Add Note:
-            </label>
+            <label htmlFor="amount">Add Note:</label>
             <input
               type="text"
               name="note"
@@ -196,7 +183,7 @@ const ExpenseForm = () => {
               aria-label="optional select note"
               onChange={({ target }) => setNote(target.value)}
               placeholder="Add notes..."
-              className="focus:outline-dark p-0.5 rounded-lg"
+              className="rounded-lg focus:outline-dark p-0.5 sm:w-auto border border-descript hover:bg-gray-50 placeholder:text-descript px-1"
             />
           </div>
 
@@ -204,13 +191,13 @@ const ExpenseForm = () => {
             disabled={amount && categoryName && date ? false : true}
             type="submit"
             aria-label="add transaction"
-            className="border-2 border-light dark:border-darkBG rounded-md px-1 py-0.5 font-semibold hover:scale-x-105 hover:bg-dark transition-all duration-300 text-center text-light mt-1.5 disabled:bg-descript disabled:opacity-60"
+            className="border-2 border-darkBG rounded-md px-1 py-0.5 font-semibold hover:scale-x-105 hover:bg-dark transition-all duration-300 text-center dark:text-light hover:text-light mt-1.5 disabled:bg-descript disabled:opacity-60 sm:col-span-2 w-4/5 mx-auto"
           >
             add
           </button>
         </div>
       </form>
-    </article>
+    </section>
   );
 };
 export default ExpenseForm;
