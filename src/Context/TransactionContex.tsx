@@ -19,6 +19,7 @@ type UseTransactionContextType = {
   addTransaction: (expense: ExpenseType) => void;
   removeTransaction: (expense: ExpenseType) => void;
   getFilterMoney: () => ReturnWealth;
+  addCategory: (category: CategoryType) => void;
   addBudget: (budget: BudgetsType) => void;
   removeBudget: (budget: BudgetsType) => void;
 };
@@ -97,6 +98,13 @@ const useTransactionContext = (): UseTransactionContextType => {
     return { outcome, income, totalWealth };
   };
 
+  const addCategory = useCallback(
+    (category: CategoryType) => {
+      dispatch({ type: 'ADD_CATEGORY', payload: category });
+    },
+    [dispatch]
+  );
+
   const addBudget = (budget: BudgetsType) => {
     dispatch({ type: 'ADD_BUDGET', payload: budget });
   };
@@ -116,6 +124,7 @@ const useTransactionContext = (): UseTransactionContextType => {
     addTransaction,
     removeTransaction,
     getFilterMoney,
+    addCategory,
     addBudget,
     removeBudget,
   };
@@ -142,6 +151,7 @@ type UseTransactionHook = {
   addTransaction: (expense: ExpenseType) => void;
   removeTransaction: (expense: ExpenseType) => void;
   getFilterMoney: () => ReturnWealth;
+  addCategory: (category: CategoryType) => void;
   addBudget: (budget: BudgetsType) => void;
   removeBudget: (budget: BudgetsType) => void;
 };

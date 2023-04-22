@@ -14,14 +14,13 @@ const ACTION = {
   REMOVE_TRANSACTION: 'REMOVE_TRANSACTION',
   EDIT_TRANSACTION: 'EDIT_TRANSACTION',
   ADD_CATEGORY: 'ADD_CATEGORY',
-  REMOVE_CATEGORY: 'REMOVE_CATEGORY',
   ADD_BUDGET: 'ADD_BUDGET',
   REMOVE_BUDGET: 'REMOVE_BUDGET',
 };
 
 export type ReducerAction = {
   type: string;
-  payload: ExpenseType | BudgetsType;
+  payload: ExpenseType | BudgetsType | CategoryType;
 };
 
 const expenseReducer = (
@@ -46,6 +45,16 @@ const expenseReducer = (
           (transaction) => transaction.id !== action.payload.id
         ),
       };
+
+    case ACTION.ADD_CATEGORY:
+      if ('icon' in action.payload) {
+        toast.success('Category has benn added!');
+        return {
+          ...state,
+          category: [...state.category, action.payload],
+        };
+      }
+
     case ACTION.ADD_BUDGET:
       if ('limit' in action.payload) {
         toast.success('New Budget added!');

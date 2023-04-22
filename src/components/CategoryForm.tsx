@@ -6,9 +6,12 @@ import { useNavigate } from 'react-router';
 import { useState } from 'react';
 // types
 import { CategoryType } from '../utils/Types';
+import useTransaction from '../Context/TransactionContex';
 
 const CategoryForm = () => {
   const navigate = useNavigate();
+
+  const { addCategory } = useTransaction();
 
   const expenseOption: [string, string] = ['Outcome', 'Income'];
   const icons = ['🎬', '🎓', '⚽️', '❤️', '🍺'];
@@ -46,7 +49,6 @@ const CategoryForm = () => {
   const handleColorsChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(target.value);
     setColor(target.value);
   };
 
@@ -64,7 +66,11 @@ const CategoryForm = () => {
         color,
       };
 
-      console.log(newCategory);
+      addCategory(newCategory);
+
+      setName('');
+      setColor('');
+      setIcon('');
     }
   };
 
