@@ -9,7 +9,7 @@ type TrackerBalanceProps = {
 const TrackerBalance = ({ totalWealth }: TrackerBalanceProps) => {
   return (
     <section className="flex flex-col items-center gap-5">
-      <h1 className="text-base text-gray-500 dark:text-descript md:text-lg">
+      <h1 className="text-base text-gray-500 dark:text-descript sm:text-lg">
         Your balance
       </h1>
 

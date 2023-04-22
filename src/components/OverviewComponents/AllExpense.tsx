@@ -17,7 +17,7 @@ const AllExpense = ({
   categoryColor,
 }: AllExpenseProps) => {
   return (
-    <article className="w-full min-w-max bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG max-h-[430px] overflow-scroll overflow-x-hidden">
+    <article className="w-4/5 mx-auto min-w-max bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG max-h-[430px] overflow-scroll overflow-x-hidden max-w-[900px]">
       <div className="flex justify-between pb-2">
         <h2 className="text-dark font-bold">Last Transaction:</h2>
         <Link

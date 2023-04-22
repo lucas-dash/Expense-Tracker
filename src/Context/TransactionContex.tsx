@@ -43,7 +43,7 @@ const useTransactionContext = (): UseTransactionContextType => {
       type: 'Outcome',
       color: '#F24E1E',
     },
-    { id: '2', icon: '☕️', name: 'Coffee', type: 'Outcome', color: '#E37400' },
+    { id: '2', icon: '☕️', name: 'Coffee', type: 'Outcome', color: '#FE5D26' },
     { id: '3', icon: '⛽️', name: 'Gas', type: 'Outcome', color: '#00BFB2' },
     { id: '4', icon: '🎮', name: 'Game', type: 'Outcome', color: '#1ABCFE' },
     { id: '5', icon: '🖥️', name: 'Tech', type: 'Outcome', color: '#EE4854' },

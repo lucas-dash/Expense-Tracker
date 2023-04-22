@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { ExpenseType, categoryColorType } from '../../utils/Types';
 // helper func
 import { categoryFilter, currencyFormater } from '../../utils/helperFunc';
+import DoghnutChart from '../../charts/DoghnutChart';
 
 type ExpenseCategoryProps = {
   outcome: ExpenseType[];
@@ -36,9 +37,19 @@ const ExpenseCategory = ({
 
   return (
     <section className="flex flex-col items-center mt-10">
-      <h2 className="text-dark dark:text-light font-bold my-3">Category</h2>
+      <h2 className="text-gray-500 dark:text-descript font-medium sm:text-lg my-3">
+        Category
+      </h2>
 
-      <article className="flex gap-5 w-max shadow-md shadow-gray-300 dark:shadow-darkBG rounded-2xl bg-gray-200 p-2">
+      <article className="pb-5">
+        {selectFlow ? (
+          <DoghnutChart outcome={outcomeCategory} color={categoryColor} />
+        ) : (
+          <DoghnutChart income={incomeCategory} color={categoryColor} />
+        )}
+      </article>
+
+      <article className="flex flex-col min-[350px]:flex-row sm:gap-5 shadow-md shadow-gray-300 dark:shadow-darkBG rounded-2xl bg-gray-200 p-2 min-w-max">
         <div
           className={`flex flex-col items-center rounded-xl p-3 w-40 dark:shadow-darkBG cursor-pointer ${
             selectFlow ? 'active-Money' : ''
@@ -69,7 +80,7 @@ const ExpenseCategory = ({
       </article>
 
       {/* category summary */}
-      <article className="w-full bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG overflow-x-hidden">
+      <section className="w-full bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG overflow-x-hidden max-w-[900px]">
         <ul className="flex flex-col gap-2">
           {selectFlow ? (
             outcomeCategory.length <= 0 ? (
@@ -101,7 +112,7 @@ const ExpenseCategory = ({
             })
           )}
         </ul>
-      </article>
+      </section>
     </section>
   );
 };
