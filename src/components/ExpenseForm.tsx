@@ -62,7 +62,7 @@ const ExpenseForm = () => {
   const yesterday = yesterdayFormat.toISOString().substr(0, 10);
 
   return (
-    <section className="flex items-center justify-center border-darkBG border-2 dark:border-light rounded-xl bg-light/70 dark:bg-light/30 dark:text-dark p-5 w-2/4 min-w-[280px] max-w-sm mx-auto shadow-2xl shadow-descript dark:shadow-descript/20 overflow-hidden relative top-6">
+    <section className="flex items-center justify-center  border-darkBG border-2 dark:border-light rounded-xl bg-light/70 dark:bg-light/30 p-5 w-2/4 min-w-[280px] max-w-sm mx-auto shadow-2xl shadow-descript dark:shadow-descript/20 overflow-hidden relative top-6">
       <form className=" w-full " onSubmit={handleSubmit}>
         <div className="absolute right-2 top-2" onClick={() => navigate(-1)}>
           <HiPlusSmall
@@ -193,7 +193,7 @@ const ExpenseForm = () => {
             aria-label="add transaction"
             className="border-2 border-darkBG rounded-md px-1 py-0.5 font-semibold hover:scale-x-105 hover:bg-dark transition-all duration-300 text-center dark:text-light hover:text-light mt-1.5 disabled:bg-descript disabled:opacity-60 sm:col-span-2 w-4/5 mx-auto"
           >
-            add
+            Add Expense
           </button>
         </div>
       </form>

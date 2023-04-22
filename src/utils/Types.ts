@@ -8,7 +8,7 @@ export type ExpenseType = {
 };
 
 export type CategoryType = {
-  id: number;
+  id: string;
   icon: string;
   name: string;
   type: string;
@@ -33,5 +33,3 @@ export type BudgetsType = {
   limit: number;
   categories: string[];
 };
-
-// { name: string }[]

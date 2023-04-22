@@ -80,7 +80,7 @@ const ExpenseCategory = ({
                   <Transaction
                     key={category.id}
                     filterCategory={category}
-                    typeExpense="outcome"
+                    typeExpense="Outcome"
                     categoryColor={categoryColor}
                   />
                 );
@@ -94,7 +94,7 @@ const ExpenseCategory = ({
                 <Transaction
                   key={category.id}
                   filterCategory={category}
-                  typeExpense="income"
+                  typeExpense="Income"
                   categoryColor={categoryColor}
                 />
               );

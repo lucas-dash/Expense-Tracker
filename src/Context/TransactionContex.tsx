@@ -36,18 +36,18 @@ const useTransactionContext = (): UseTransactionContextType => {
   );
   const [category, setCategory] = useLocalStorage<CategoryType[]>('category', [
     {
-      id: 1,
+      id: '1',
       icon: '🍔',
       name: 'Food & Drinks',
       type: 'Outcome',
       color: '#F24E1E',
     },
-    { id: 2, icon: '☕️', name: 'Coffee', type: 'Outcome', color: '#E37400' },
-    { id: 3, icon: '⛽️', name: 'Gas', type: 'Outcome', color: '#CC0000' },
-    { id: 4, icon: '🎮', name: 'Game', type: 'Outcome', color: '#1ABCFE' },
-    { id: 5, icon: '🖥️', name: 'Tech', type: 'Outcome', color: '#EE4854' },
-    { id: 6, icon: '💰', name: 'Salary', type: 'Income', color: '#0ACF83' },
-    { id: 7, icon: '💼', name: 'Bussines', type: 'Income', color: '#E44D26' },
+    { id: '2', icon: '☕️', name: 'Coffee', type: 'Outcome', color: '#E37400' },
+    { id: '3', icon: '⛽️', name: 'Gas', type: 'Outcome', color: '#00BFB2' },
+    { id: '4', icon: '🎮', name: 'Game', type: 'Outcome', color: '#1ABCFE' },
+    { id: '5', icon: '🖥️', name: 'Tech', type: 'Outcome', color: '#EE4854' },
+    { id: '6', icon: '💰', name: 'Salary', type: 'Income', color: '#0ACF83' },
+    { id: '7', icon: '💼', name: 'Bussines', type: 'Income', color: '#E44D26' },
   ]);
 
   const [budgets, setBudgets] = useLocalStorage<BudgetsType[]>('budgets', []);

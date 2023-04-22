@@ -39,14 +39,15 @@ const TrackerBalance = ({ totalWealth }: TrackerBalanceProps) => {
           <HiPlusSmall size={20} className="inline-block font-bold" />
         </Link>
 
-        <button
+        <Link
+          to={'/addCategory'}
           className="action-button"
           aria-label="add category"
-          // onClick={() => addCategory((prev) => !prev)}
+          type="button"
         >
           add Category
           <HiPlusSmall size={20} className="inline-block font-bold" />
-        </button>
+        </Link>
       </div>
     </section>
   );

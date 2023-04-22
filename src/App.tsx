@@ -12,6 +12,9 @@ import TrackerPage from './pages/TrackerPage';
 import BudgetsPage from './pages/BudgetsPage';
 import Overview from './pages/Overview';
 import ExpenseForm from './components/ExpenseForm';
+import CategoryForm from './components/CategoryForm';
+
+// Context
 import { TransactionProvider } from './Context/TransactionContex';
 
 //toastify library
@@ -26,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="tracker" element={<TrackerPage />}></Route>
       <Route path="budgets" element={<BudgetsPage />} />
       <Route path="addExpense" element={<ExpenseForm />} />
+      <Route path="addCategory" element={<CategoryForm />} />
     </Route>
   )
 );

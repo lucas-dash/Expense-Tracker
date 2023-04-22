@@ -56,7 +56,11 @@ const Transaction = ({
           })}
 
           <div className="flex gap-1">
-            <p className="md:text-lg dark:text-dark font-medium">
+            <p
+              className={`md:text-lg font-medium ${
+                type === 'Outcome' ? 'text-outcome' : 'text-income'
+              }`}
+            >
               {type === 'Outcome'
                 ? `-${currencyFormater(amount)}`
                 : currencyFormater(amount)}
@@ -70,6 +74,7 @@ const Transaction = ({
           </div>
         </li>
       );
+      //! sort transaction
     } else if (filterCategory && typeExpense) {
       const { categoryName, allExpense } = filterCategory;
 
@@ -104,8 +109,12 @@ const Transaction = ({
           })}
 
           <div className="flex gap-1">
-            <p className="md:text-lg dark:text-dark font-medium">
-              {typeExpense === 'outcome'
+            <p
+              className={`md:text-lg font-medium ${
+                typeExpense === 'Outcome' ? 'text-outcome' : 'text-income'
+              }`}
+            >
+              {typeExpense === 'Outcome'
                 ? '-' + currencyFormater(totalInCategory)
                 : currencyFormater(totalInCategory)}
             </p>
