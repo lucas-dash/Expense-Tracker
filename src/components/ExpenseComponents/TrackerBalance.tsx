@@ -1,5 +1,8 @@
+// others
 import { HiPlusSmall } from 'react-icons/hi2';
+// react library
 import { Link } from 'react-router-dom';
+// utils
 import { currencyFormater } from '../../utils/helperFunc';
 
 type TrackerBalanceProps = {

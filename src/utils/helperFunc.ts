@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { CategoryFilterType, ExpenseType } from './Types';
 import { v4 as uuidv4 } from 'uuid';
-import { toast } from 'react-toastify';
 
 export const currencyFormater = (num: number = 0) => {
   const formatter = new Intl.NumberFormat(undefined, {

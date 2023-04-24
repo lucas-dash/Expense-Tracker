@@ -1,4 +1,6 @@
+// other
 import { HiPlusSmall } from 'react-icons/hi2';
+// router library
 import { Link } from 'react-router-dom';
 // types
 import { ExpenseType, categoryColorType } from '../../utils/Types';
