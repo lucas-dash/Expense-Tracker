@@ -14,7 +14,30 @@ const CategoryForm = () => {
   const { addCategory } = useTransaction();
 
   const expenseOption: [string, string] = ['Outcome', 'Income'];
-  const icons = ['🎬', '🎓', '⚽️', '❤️', '🍺'];
+  const icons = [
+    '🎬',
+    '🎓',
+    '⚽️',
+    '❤️',
+    '🍺',
+    '✈️',
+    '⚡️',
+    '🏠',
+    '🥐',
+    '☕️',
+    '🎧',
+    '🕹️',
+    '🛠️',
+    '💵',
+    '💪',
+    '💳',
+    '🚗',
+    '🏦',
+    '⛽️',
+    '👟',
+    '📱',
+    '🎭',
+  ];
   const colors = [
     '#FE5D26',
     '#FF74D4',

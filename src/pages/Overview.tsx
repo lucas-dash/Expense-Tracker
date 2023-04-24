@@ -5,7 +5,7 @@ import Balance from '../components/OverviewComponents/Balance';
 // hooks
 import useTransaction from '../Context/TransactionContex';
 // utils
-import { getWelcomeText } from '../utils/helperFunc';
+import { getWelcomeText, getTodayCashFlow } from '../utils/helperFunc';
 
 const Overview = () => {
   const { state, removeTransaction, getFilterMoney } = useTransaction();
@@ -18,16 +18,19 @@ const Overview = () => {
     icon: cate.icon,
   }));
 
-  const { totalWealth, outcome, income } = getFilterMoney();
+  const { outcome, income } = getFilterMoney();
+
+  const todayCashFlow = getTodayCashFlow(income, outcome);
+
   const welcomeText = getWelcomeText();
 
   return (
     <main className="font-nunito w-11/12 mx-auto pb-6">
-      <h1 className="font-medium text-xl text-center py-5 text-gray-500 dark:text-descript">
+      <h1 className="font-medium text-xl text-center pb-7 text-gray-500 dark:text-descript">
         {welcomeText}
       </h1>
       <section>
-        <Balance totalWealth={totalWealth} outcome={outcome} />
+        <Balance cashFlow={todayCashFlow} outcome={outcome} />
         <BarChart income={income} outcome={outcome} />
         <AllExpense
           allExpense={allExpense}

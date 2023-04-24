@@ -1,3 +1,4 @@
+// components
 import ExpenseCategory from '../components/ExpenseComponents/ExpenseCategory';
 import TrackerBalance from '../components/ExpenseComponents/TrackerBalance';
 // hooks
@@ -5,8 +6,6 @@ import useTransaction from '../Context/TransactionContex';
 
 const TrackerPage = () => {
   const { state, getFilterMoney } = useTransaction();
-
-  // todo today cashflow
 
   const { outcome, income, totalWealth } = getFilterMoney();
 

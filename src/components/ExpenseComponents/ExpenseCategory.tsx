@@ -36,12 +36,12 @@ const ExpenseCategory = ({
   }, [income]);
 
   return (
-    <section className="flex flex-col items-center mt-10">
-      <h2 className="text-gray-500 dark:text-descript font-medium sm:text-lg my-4 pb-2">
+    <section className="flex flex-col items-center mt-6">
+      <h2 className="text-gray-500 dark:text-descript font-medium sm:text-lg my-3">
         Category
       </h2>
 
-      <article className="pb-5">
+      <article className="mb-7">
         {selectFlow ? (
           outcomeCategory.length <= 0 ? (
             ''

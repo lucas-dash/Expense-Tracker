@@ -38,7 +38,7 @@ const useTransactionContext = (): UseTransactionContextType => {
   const [category, setCategory] = useLocalStorage<CategoryType[]>('category', [
     {
       id: '1',
-      icon: '🍔',
+      icon: '🥐',
       name: 'Food & Drinks',
       type: 'Outcome',
       color: '#0ACF83',
@@ -49,6 +49,21 @@ const useTransactionContext = (): UseTransactionContextType => {
     { id: '5', icon: '🖥️', name: 'Tech', type: 'Outcome', color: '#EE4854' },
     { id: '6', icon: '💰', name: 'Salary', type: 'Income', color: '#0ACF83' },
     { id: '7', icon: '💼', name: 'Bussines', type: 'Income', color: '#B81365' },
+    { id: '8', icon: '💵', name: 'Tips', type: 'Income', color: '#FED766' },
+    { id: '9', icon: '🏦', name: 'Loan', type: 'Income', color: '#84A59D' },
+    { id: '10', icon: '✈️', name: 'Travel', type: 'Outcome', color: '#EFBCD5' },
+    { id: '11', icon: '🎭', name: 'Fun', type: 'Outcome', color: '#FDE74C' },
+    {
+      id: '12',
+      icon: '👕',
+      name: 'Clothes',
+      type: 'Outcome',
+      color: '#5448C8',
+    },
+    { id: '13', icon: '🏨', name: 'Hotel', type: 'Outcome', color: '#058C42' },
+    { id: '14', icon: '🏠', name: 'Rent', type: 'Outcome', color: '#E44D26' },
+    { id: '15', icon: '🚗', name: 'Car', type: 'Outcome', color: '#84DCCF' },
+    { id: '16', icon: '🗃️', name: 'Others', type: 'Outcome', color: '#403F4C' },
   ]);
 
   const [budgets, setBudgets] = useLocalStorage<BudgetsType[]>('budgets', []);

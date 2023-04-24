@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { CategoryFilterType, ExpenseType } from './Types';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 export const currencyFormater = (num: number = 0) => {
   const formatter = new Intl.NumberFormat(undefined, {
@@ -145,4 +146,29 @@ export const getWelcomeText = () => {
   } else {
     return 'Have a Nice Day!';
   }
+};
+
+/**
+ *
+ * @param income - first must be income
+ * @param outcome second must be outcome
+ * @returns  today cashflow number
+ */
+export const getTodayCashFlow = (
+  income: ExpenseType[],
+  outcome: ExpenseType[]
+) => {
+  const today = new Date().toISOString().substr(0, 10);
+
+  const todayIncome = income
+    .filter((expense) => (expense.date === formatDate(today) ? expense : null))
+    .reduce((acc, prev) => prev.amount + acc, 0);
+
+  const todayOutcome = outcome
+    .filter((expense) => (expense.date === formatDate(today) ? expense : null))
+    .reduce((acc, prev) => prev.amount + acc, 0);
+
+  let todayCashFlow = todayIncome - todayOutcome;
+
+  return todayCashFlow;
 };
