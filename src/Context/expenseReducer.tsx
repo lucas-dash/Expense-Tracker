@@ -48,7 +48,7 @@ const expenseReducer = (
 
     case ACTION.ADD_CATEGORY:
       if ('icon' in action.payload) {
-        toast.success('Category has benn added!');
+        toast.success('Category has been added!');
         return {
           ...state,
           category: [...state.category, action.payload],

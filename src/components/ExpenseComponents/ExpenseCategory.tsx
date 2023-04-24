@@ -37,13 +37,19 @@ const ExpenseCategory = ({
 
   return (
     <section className="flex flex-col items-center mt-10">
-      <h2 className="text-gray-500 dark:text-descript font-medium sm:text-lg my-3">
+      <h2 className="text-gray-500 dark:text-descript font-medium sm:text-lg my-4 pb-2">
         Category
       </h2>
 
       <article className="pb-5">
         {selectFlow ? (
-          <DoghnutChart outcome={outcomeCategory} color={categoryColor} />
+          outcomeCategory.length <= 0 ? (
+            ''
+          ) : (
+            <DoghnutChart outcome={outcomeCategory} color={categoryColor} />
+          )
+        ) : incomeCategory.length <= 0 ? (
+          ''
         ) : (
           <DoghnutChart income={incomeCategory} color={categoryColor} />
         )}
@@ -84,7 +90,9 @@ const ExpenseCategory = ({
         <ul className="flex flex-col gap-2">
           {selectFlow ? (
             outcomeCategory.length <= 0 ? (
-              <li className="text-center">No Transaction yet.</li>
+              <li className="text-center dark:text-dark">
+                No Transaction yet.
+              </li>
             ) : (
               outcomeCategory.map((category) => {
                 return (
@@ -98,7 +106,7 @@ const ExpenseCategory = ({
               })
             )
           ) : incomeCategory.length <= 0 ? (
-            <li className="text-center">No Transaction yet.</li>
+            <li className="text-center dark:text-dark">No Transaction yet.</li>
           ) : (
             incomeCategory.map((category) => {
               return (

@@ -13,7 +13,7 @@ const TrackerBalance = ({ totalWealth }: TrackerBalanceProps) => {
         Your balance
       </h1>
 
-      <article className="flex gap-5">
+      <article className="flex flex-col min-[350px]:flex-row gap-5">
         <div className="flex flex-col items-center bg-blend-soft-light bg-white rounded-xl p-3 w-40 shadow-md shadow-gray-300 dark:shadow-darkBG">
           {/* all money */}
           <h3 className="font-bold text-xl text-dark">

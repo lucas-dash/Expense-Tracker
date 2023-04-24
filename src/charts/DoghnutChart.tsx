@@ -1,6 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { CategoryFilterType, categoryColorType } from '../utils/Types';
+import { useMemo } from 'react';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -18,20 +19,22 @@ const DoghnutChart = ({ outcome, income, color }: ChartType) => {
           font: {
             size: 14,
           },
-          color: 'black',
+          color: '#AEABC2',
           usePointStyle: true,
         },
       },
     },
   };
 
-  const chartOutColor = outcome
-    ?.map((expense) => {
-      return color
-        .filter((col) => col.catName === expense.categoryName)
-        .flatMap((col) => col.color);
-    })
-    .flat();
+  const chartOutColor = useMemo(() => {
+    return outcome
+      ?.map((expense) => {
+        return color
+          .filter((col) => col.catName === expense.categoryName)
+          .flatMap((col) => col.color);
+      })
+      .flat();
+  }, [outcome]);
 
   const outcomeData = {
     labels: outcome?.map((expense) => expense.categoryName),
@@ -47,13 +50,15 @@ const DoghnutChart = ({ outcome, income, color }: ChartType) => {
     ],
   };
 
-  const chartInColor = income
-    ?.map((expense) => {
-      return color
-        .filter((col) => col.catName === expense.categoryName)
-        .flatMap((col) => col.color);
-    })
-    .flat();
+  const chartIncoColor = useMemo(() => {
+    return income
+      ?.map((expense) => {
+        return color
+          .filter((col) => col.catName === expense.categoryName)
+          .flatMap((col) => col.color);
+      })
+      .flat();
+  }, [income]);
 
   const incomeData = {
     labels: income?.map((expense) => expense.categoryName),
@@ -63,14 +68,14 @@ const DoghnutChart = ({ outcome, income, color }: ChartType) => {
         data: income?.map((expense) =>
           expense.allExpense.reduce((acc, prev) => acc + prev, 0)
         ),
-        backgroundColor: chartInColor,
+        backgroundColor: chartIncoColor,
         borderColor: 'white',
       },
     ],
   };
 
   return (
-    <div className="h-72">
+    <div className="h-64">
       {outcome ? (
         <Doughnut data={outcomeData} options={options} />
       ) : (

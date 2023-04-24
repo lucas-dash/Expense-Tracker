@@ -1,4 +1,5 @@
 // components
+import BarChart from '../charts/BarChart';
 import AllExpense from '../components/OverviewComponents/AllExpense';
 import Balance from '../components/OverviewComponents/Balance';
 // hooks
@@ -17,14 +18,17 @@ const Overview = () => {
     icon: cate.icon,
   }));
 
-  const { totalWealth, outcome } = getFilterMoney();
+  const { totalWealth, outcome, income } = getFilterMoney();
   const welcomeText = getWelcomeText();
 
   return (
-    <main className="font-nunito w-11/12 mx-auto ">
-      <h1 className="font-medium text-xl py-5 pl-4">{welcomeText}</h1>
+    <main className="font-nunito w-11/12 mx-auto pb-6">
+      <h1 className="font-medium text-xl text-center py-5 text-gray-500 dark:text-descript">
+        {welcomeText}
+      </h1>
       <section>
         <Balance totalWealth={totalWealth} outcome={outcome} />
+        <BarChart income={income} outcome={outcome} />
         <AllExpense
           allExpense={allExpense}
           removeTransaction={removeTransaction}

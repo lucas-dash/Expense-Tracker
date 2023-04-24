@@ -43,7 +43,7 @@ const Transaction = ({
                     {cat.icon}
                   </span>
                   <div className="flex items-start flex-col justify-center">
-                    <h4 className="md:text-lg dark:text-dark">
+                    <h4 className="md:text-lg dark:text-dark text-sm min-[330px]:text-base">
                       {/* <Link to="/EditTransaction/20"> {category}</Link> */}
                       {category}
                     </h4>

@@ -17,9 +17,11 @@ const AllExpense = ({
   categoryColor,
 }: AllExpenseProps) => {
   return (
-    <article className="w-4/5 mx-auto min-w-max bg-light rounded-xl p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG max-h-[430px] overflow-scroll overflow-x-hidden max-w-[900px]">
-      <div className="flex justify-between pb-2">
-        <h2 className="text-dark font-bold">Last Transaction:</h2>
+    <article className="sm:w-4/5 mx-auto min-w-[270px] bg-light rounded-xl p-1 min-[350px]:p-4 mt-7 min-h-[170px] shadow-lg shadow-descript dark:shadow-darkBG max-h-[430px] overflow-scroll overflow-x-hidden max-w-[900px]">
+      <div className="flex justify-between items-center pb-2">
+        <h2 className="text-dark font-bold max-[350px]:pl-2">
+          Last Transaction:
+        </h2>
         <Link
           to={'/addExpense'}
           className="border-2 border-darkBG dark:border-dark dark:text-dark rounded-md px-1 py-0.5 flex items-center font-semibold hover:scale-x-105 transition-all duration-300 "
@@ -32,7 +34,7 @@ const AllExpense = ({
 
       <ul className="flex flex-col gap-3">
         {allExpense.length <= 0 ? (
-          <li className="text-center">No Transaction yet.</li>
+          <li className="text-center dark:text-dark">No Transaction yet.</li>
         ) : (
           allExpense.map((expense) => {
             return (
